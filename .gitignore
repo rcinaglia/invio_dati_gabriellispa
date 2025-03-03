@@ -1,1 +1,3 @@
 Pass.ENV
+.gitignore
+__pycache__

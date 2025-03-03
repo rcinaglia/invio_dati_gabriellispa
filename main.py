@@ -11,8 +11,6 @@ pwd = os.getenv('PASSWORD')
 hst = os.getenv('HOST')
 usr = os.getenv('USER')
 
-
-
 connection = oracledb.connect(
     user= usr, 
     password = pwd, 
