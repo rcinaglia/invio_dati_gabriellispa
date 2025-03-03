@@ -36,6 +36,5 @@ with open("Data.json", "w") as file:
     file.write(jsone)
 
 
-
 cursor.close()
 connection.close()
