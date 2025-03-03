@@ -1,0 +1,22 @@
+{
+    "days": [
+        {
+            "day": "2025-01-02",
+            "expenseCenters": [
+                {
+                    "expenseCenter": "00446-2354",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 27557.600000000006,
+                            "tickets": 2010
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "start": 540,
+    "end": 555
+}
