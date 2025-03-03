@@ -5,7 +5,7 @@ import Utilities as Utils
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv("Pass.ENV")
 
 pwd = os.getenv('PASSWORD')
 hst = os.getenv('HOST')
@@ -20,7 +20,6 @@ connection = oracledb.connect(
     port="1521",
     service_name="mgdwh"
 )
-
 
 cursor = connection.cursor()
 
@@ -37,9 +36,6 @@ jsone = json.dumps(my_dict)
 
 with open("Data.json", "w") as file:
     file.write(jsone)
-
-
-
 
 
 
