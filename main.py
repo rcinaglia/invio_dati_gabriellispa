@@ -7,17 +7,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-pwd = os.getenv
+pwd = os.getenv('PASSWORD')
+hst = os.getenv('HOST')
+usr = os.getenv('USER')
 
 
 
 connection = oracledb.connect(
-    user="ITI_SQL", 
-    password = "ForzaAscoli1898", 
-    host="mgdwh.intra.gabriellispa.it", 
+    user= usr, 
+    password = pwd, 
+    host= hst, 
     port="1521",
     service_name="mgdwh"
 )
+
 
 cursor = connection.cursor()
 
