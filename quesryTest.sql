@@ -1,19 +1,27 @@
-SELECT * FROM 
-(
-SELECT
-    TO_CHAR(MIN(INC_DATA), 'YYYY-MM-DD') AS day,
-    PDV_COD AS pdvcode,  -- Codice del PDV
-    CCO_COD AS ccocode,  -- Codice del CCO
-    SUM(INC_VALORE) AS sales,  -- Somma delle vendite per ogni combinazione PDV_COD e CCO_COD
-    SUM(INC_BATTUTE_TOT) AS tickets  -- Somma dei ticket per ogni combinazione PDV_COD e CCO_COD
-FROM DM.FAT_INCASSI
-INNER JOIN 
-    DM.DIM_ANA_PDV ON DM.FAT_INCASSI.PDV_KEY = DM.DIM_ANA_PDV.PDV_KEY
-INNER JOIN 
-    DM.DIM_ANA_CCO_REP ON DM.FAT_INCASSI.PDV_KEY = DM.DIM_ANA_CCO_REP.PDV_KEY
+SELECT 
+    cco.CCO_COD,
+    TO_CHAR(TRUNC(inc.INC_DATA)) AS DATA_GIORNALIERA,
+    inc.PDV_KEY,
+    SUM(inc.INC_VALORE) AS INC_VALORE,
+    SUM(inc.INC_BATTUTE_TOT) AS INC_BATTUTE_TOT
+FROM 
+    DM.FAT_INCASSI inc
+LEFT JOIN (
+    SELECT 
+        PDV_KEY, 
+        CLASS_REP_COD, 
+        MAX(CCO_COD) AS CCO_COD
+    FROM DM.DIM_ANA_CCO_REP
+    GROUP BY PDV_KEY, CLASS_REP_COD
+) cco
+    ON inc.PDV_KEY = cco.PDV_KEY 
+    AND inc.CLASS_REP_COD = cco.CLASS_REP_COD
 WHERE 
-    INC_DATA = TO_DATE('2025-01-03', 'YYYY-MM-DD')
+    inc.INC_DATA >= TO_TIMESTAMP('2025-02-20', 'YYYY-MM-DD') 
+    AND inc.INC_DATA < TO_TIMESTAMP('2025-02-21', 'YYYY-MM-DD')
+    AND inc.PDV_KEY = 638
 GROUP BY 
-    PDV_COD,  -- Raggruppamento per PDV_COD
-    CCO_COD  -- Raggruppamento per CCO_COD
-) WHERE PDVCODE = 410;
+    cco.CCO_COD,
+    TRUNC(inc.INC_DATA),
+    inc.PDV_KEY;
+
