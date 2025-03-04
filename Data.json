@@ -1,16 +1,104 @@
 {
     "days": [
         {
-            "day": "2025-01-02",
+            "day": "20-FEB-25",
             "expenseCenters": [
                 {
-                    "expenseCenter": "00446-2354",
+                    "expenseCenter": "638-20200",
                     "steps": [
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 27557.600000000006,
-                            "tickets": 2010
+                            "sales": 7036.67,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-20350",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 1784.3,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-21000",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 17550.6,
+                            "tickets": 1813
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-20300",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 3901.7,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-None",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 232.82,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-20250",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 4994.91,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-20400",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 3260.24,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-21100",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 2487.99,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "638-20500",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 2288.43,
+                            "tickets": 0
                         }
                     ]
                 }

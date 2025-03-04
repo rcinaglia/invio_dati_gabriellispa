@@ -5,12 +5,17 @@ import Utilities as Utils
 import os
 from dotenv import load_dotenv
 
+
+#-------LOAD DB CREDENTIALS---------
 load_dotenv("Pass.ENV")
 
 pwd = os.getenv('PASSWORD')
 hst = os.getenv('HOST')
 usr = os.getenv('USER')
 
+
+
+#-------DB CONNECTION---------
 connection = oracledb.connect(
     user= usr, 
     password = pwd, 
@@ -24,32 +29,33 @@ cursor = connection.cursor()
 cursor.execute(Utils.getQuery(0)) 
 res = cursor.fetchall()
 
-print(res)
 
 
-firstRow = res[0]
-day = firstRow[0].split(" ")[0]
-
-
-
-expenseCenter = str(firstRow[1]) + "-" + str(firstRow[2])
 start = 540 
 end = 555
-tickets = firstRow[4]
 
-sales = 0
+
+#-------LOAD DB CREDENTIALS---------
+
+expenseCenters = []
+
+
 for row in res:
-    sales += row[3]
-    
+    day = row[1].split(" ")[0]
+    expenseCenter = str(row[2]) + "-" + str(row[0])
+    tickets = row[4]
+    sales = row[3]
+    Steps = [{"start": start, "end": end, "sales": sales, "tickets": tickets}]
+    expenseCenters.append( {"expenseCenter": expenseCenter ,"steps": Steps} )
 
-Steps = [{"start": start, "end": end, "sales": sales, "tickets":tickets}]
-expenseCenters = [{"expenseCenter": expenseCenter ,"steps": Steps}]
+
 
 days = [{"day": day, "expenseCenters" : expenseCenters}]
 Final = {"days" : days, "start":start, "end":end}
 
-FinalJson = json.dumps(Final)
 
+
+FinalJson = json.dumps(Final)
 with open("Data.json", "w") as file:
     file.write(FinalJson)
 
