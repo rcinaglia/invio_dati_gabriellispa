@@ -30,8 +30,8 @@ LEFT JOIN (
     ON inc.PDV_KEY = cco.PDV_KEY 
     AND inc.CLASS_REP_COD = cco.CLASS_REP_COD
 WHERE 
-    inc.INC_DATA >= TO_TIMESTAMP('2025-02-20', 'YYYY-MM-DD') 
-    AND inc.INC_DATA < TO_TIMESTAMP('2025-02-21', 'YYYY-MM-DD')
+    inc.INC_DATA >= TO_TIMESTAMP(:DataIniziale, 'DD-MM-YYYY') 
+    AND inc.INC_DATA <= TO_TIMESTAMP(:DataFinale, 'DD-MM-YYYY')
     AND inc.PDV_KEY = 638
 GROUP BY 
     cco.CCO_COD,

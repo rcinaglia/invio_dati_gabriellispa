@@ -1,4 +1,4 @@
-def getQuery(query, fileName = "Query.sql"):
+def getQuery(query, fileName = "queris.sql"):
     with open(fileName, "r") as file:
         queriesString = file.read()
 

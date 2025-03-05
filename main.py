@@ -26,32 +26,30 @@ connection = oracledb.connect(
 
 cursor = connection.cursor()
 
-cursor.execute(Utils.getQuery(0)) 
+cursor.execute(Utils.getQuery(0), DataIniziale="21-02-2025", DataFinale="23-02-2025") 
 res = cursor.fetchall()
 
 
-#Steps = [{"start": start, "end": end, "sales": sales, "tickets": tickets}]
-#expenseCenters.append( {"expenseCenter": expenseCenter ,"steps": Steps} )
-
-start = 540 
-end = 555
 
 
 #-------LOAD DB CREDENTIALS---------
 
-ExpenseCenter = []
 
+
+start = 540 
+end = 555
+
+ExpenseCenter = []
 days = []
 
 for row in res:
 
     day = row[1].split(" ")[0]
     expenseCenter = str(row[2]) + "-" + str(row[0])
-    tickets = row[4]
-    sales = row[3]
+    tickets = row[5]
+    sales = row[4]
 
     Steps = [{"start": start, "end": end, "sales": sales, "tickets": tickets}]
-
 
     index = next((i for i, d in enumerate(days) if d["day"] == day), None)
 
@@ -66,9 +64,6 @@ for row in res:
 
     
     
-
-
-
 
 
 Final = {"days" : days, "start":start, "end":end}
