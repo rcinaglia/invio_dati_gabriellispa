@@ -30,6 +30,8 @@ cursor.execute(Utils.getQuery(0))
 res = cursor.fetchall()
 
 
+#Steps = [{"start": start, "end": end, "sales": sales, "tickets": tickets}]
+#expenseCenters.append( {"expenseCenter": expenseCenter ,"steps": Steps} )
 
 start = 540 
 end = 555
@@ -37,20 +39,38 @@ end = 555
 
 #-------LOAD DB CREDENTIALS---------
 
-expenseCenters = []
+ExpenseCenter = []
 
+days = []
 
 for row in res:
+
     day = row[1].split(" ")[0]
     expenseCenter = str(row[2]) + "-" + str(row[0])
     tickets = row[4]
     sales = row[3]
+
     Steps = [{"start": start, "end": end, "sales": sales, "tickets": tickets}]
-    expenseCenters.append( {"expenseCenter": expenseCenter ,"steps": Steps} )
+
+
+    index = next((i for i, d in enumerate(days) if d["day"] == day), None)
+
+
+    if index is not None:
+        ExpenseCenter = {"expenseCenter": expenseCenter ,"steps": Steps}
+        days[index]["expenseCenters"].append(ExpenseCenter)
+    else:
+        ExpenseCenter = {"expenseCenter": expenseCenter ,"steps": Steps}
+        days.append({"day": day, "expenseCenters" : [ExpenseCenter]})
+
+
+    
+    
 
 
 
-days = [{"day": day, "expenseCenters" : expenseCenters}]
+
+
 Final = {"days" : days, "start":start, "end":end}
 
 
@@ -60,16 +80,6 @@ with open("Data.json", "w") as file:
     file.write(FinalJson)
 
 
-#field_names = [i[0] for i in cursor.description]
-
-#my_dict = [dict(zip(field_names, x)) for x in res]
-#
-#
-#jsone = json.dumps(my_dict)
-#
-#
-#with open("Data.json", "w") as file:
-#    file.write(jsone)
 
 
 cursor.close()
