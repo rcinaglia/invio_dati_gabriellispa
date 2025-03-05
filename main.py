@@ -12,21 +12,21 @@ load_dotenv("Pass.ENV")
 pwd = os.getenv('PASSWORD')
 hst = os.getenv('HOST')
 usr = os.getenv('USER')
-
-
+pt = os.getenv('PORT')
+sn = os.getenv('SERVICENAME')
 
 #-------DB CONNECTION---------
 connection = oracledb.connect(
     user= usr, 
     password = pwd, 
     host= hst, 
-    port="1521",
-    service_name="mgdwh"
+    port=pt,
+    service_name=sn
 )
 
 cursor = connection.cursor()
 
-cursor.execute(Utils.getQuery(0), DataIniziale="21-02-2025", DataFinale="23-02-2025") 
+cursor.execute(Utils.getQuery(0), DataIniziale="20-02-2025", DataFinale="21-02-2025") 
 res = cursor.fetchall()
 
 
