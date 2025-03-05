@@ -1,6 +1,7 @@
 {
     "days": [
         {
+<<<<<<< Updated upstream
             "day": "21-FEB-25",
             "expenseCenters": [
                 {
@@ -106,6 +107,9 @@
         },
         {
             "day": "20-FEB-25",
+=======
+            "day": "20-02-2025",
+>>>>>>> Stashed changes
             "expenseCenters": [
                 {
                     "expenseCenter": "638-20200",
@@ -113,8 +117,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 7036.67,
-                            "tickets": 0
+                            "sales": 12,
+                            "tickets": 7036.67
                         }
                     ]
                 },
@@ -124,8 +128,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 1784.3,
-                            "tickets": 0
+                            "sales": 16,
+                            "tickets": 1784.3
                         }
                     ]
                 },
@@ -135,8 +139,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 17550.6,
-                            "tickets": 1813
+                            "sales": 25,
+                            "tickets": 17550.6
                         }
                     ]
                 },
@@ -146,8 +150,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 3901.7,
-                            "tickets": 0
+                            "sales": 11,
+                            "tickets": 3901.7
                         }
                     ]
                 },
@@ -157,8 +161,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 232.82,
-                            "tickets": 0
+                            "sales": 92,
+                            "tickets": 232.82
                         }
                     ]
                 },
@@ -168,8 +172,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 4994.91,
-                            "tickets": 0
+                            "sales": 10,
+                            "tickets": 4994.91
                         }
                     ]
                 },
@@ -179,8 +183,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 3260.24,
-                            "tickets": 0
+                            "sales": 13,
+                            "tickets": 3260.24
                         }
                     ]
                 },
@@ -190,8 +194,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 2487.99,
-                            "tickets": 0
+                            "sales": 78,
+                            "tickets": 2487.99
                         }
                     ]
                 },
@@ -201,8 +205,8 @@
                         {
                             "start": 540,
                             "end": 555,
-                            "sales": 2288.43,
-                            "tickets": 0
+                            "sales": 17,
+                            "tickets": 2288.43
                         }
                     ]
                 }

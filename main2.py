@@ -1,7 +1,7 @@
 import oracledb
 import json
 import Utilities as Utils
-import requests
+import APIcalls as api
 
 import os
 from dotenv import load_dotenv
@@ -12,8 +12,6 @@ pwd = os.getenv('PASSWORD')
 hst = os.getenv('HOST')
 usr = os.getenv('USER')
 
-def callAPI(json_data):
-    url = ""
 
     
 
@@ -40,6 +38,9 @@ try:
     with open("Data.json", "w") as file:
         file.write(jsone)
     # END Data.json
+
+    
+    
 
 except oracledb.DatabaseError as e:
     print(f">> Errore durante la connesione al Database: {e}")
