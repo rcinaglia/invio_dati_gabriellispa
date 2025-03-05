@@ -2,8 +2,13 @@ import oracledb
 import json
 import Utilities as Utils
 
+import tkinter as tk
+import ttkbootstrap as tb
+from PIL import Image, ImageTk
+
 import os
 from dotenv import load_dotenv
+
 
 
 #-------LOAD DB CREDENTIALS---------
@@ -14,6 +19,59 @@ hst = os.getenv('HOST')
 usr = os.getenv('USER')
 pt = os.getenv('PORT')
 sn = os.getenv('SERVICENAME')
+
+
+
+app = tb.Window(themename ="darkly")
+app.resizable(False, False)
+
+app.geometry("400x500")
+app.title("Invio dati")
+app.iconbitmap("Gabrielli.ico")
+
+
+def EnableFinishDate():
+    if State.get() == 1:
+        date2.grid()
+    else:
+        date2.grid_remove()
+
+img = Image.open("Gabrielli.png")
+img = img.resize((250, 150))
+
+img = ImageTk.PhotoImage(img)
+panel = tk.Label(app, image = img)
+panel.pack()
+
+
+Frame = tb.Frame(app)
+
+Frame.rowconfigure(1, minsize=45)
+
+Testo = tb.Label(Frame, text="Data di inizio")
+Testo.grid(column=0, row=0, padx=(0, 10))
+date = tb.DateEntry(Frame, bootstyle="dark")
+
+date.button.place(y = -0.5, x = 100)
+date.grid(column=1, row=0, pady=5)
+
+State = tk.IntVar()
+Check = tb.Checkbutton(Frame, text='Data di fine', style='Roundtoggle.Toolbutton',  variable=State,  command=EnableFinishDate)
+Check.grid(column=0, row=1, pady=5, padx=(0, 10))
+
+date2 = tb.DateEntry(Frame, bootstyle="dark")
+date2.button.place(y = -0.5, x = 100)
+
+date2.grid(column=1, row=1, pady=5)
+date2.grid_remove()
+
+
+Frame.pack(padx=10, pady=10)
+
+
+Button = tb.Button(app, text="Invia", bootstyle="dark", command=lambda: print("ciao"), width=20)
+Button.pack(pady=20)
+
 
 #-------DB CONNECTION---------
 connection = oracledb.connect(
@@ -74,8 +132,9 @@ FinalJson = json.dumps(Final)
 with open("Data.json", "w") as file:
     file.write(FinalJson)
 
-
+print("fatto")
 
 
 cursor.close()
 connection.close()
+app.mainloop()

@@ -4,3 +4,6 @@ def getQuery(query, fileName = "queris.sql"):
 
     queries = queriesString.split(';')
     return queries[query]
+
+
+

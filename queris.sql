@@ -3,7 +3,11 @@ SELECT
     inc.PDV_COD,
     inc.PDV_KEY,
     cco.CCO_COD,  
-    SUM(inc.INC_VALORE) AS INC_VALORE
+    SUM(inc.INC_VALORE) AS INC_VALORE,
+    MAX(inc.CLASS_REP_COD),
+    SUM(inc.INC_VALORE) AS INC_VALORE,
+    SUM(inc.INC_BATTUTE_TOT) AS INC_BATTUTE_TT
+
 FROM (
     SELECT 
         DM.FAT_INCASSI.INC_DATA,
@@ -32,7 +36,7 @@ WHERE
     inc.INC_DATA >= TO_TIMESTAMP(:DataIniziale, 'DD-MM-YYYY') 
     AND inc.INC_DATA < TO_TIMESTAMP(:DataFinale, 'DD-MM-YYYY')
     AND cco.CCO_COD IS NOT NULL
-    AND inc.PDV_KEY = 638 -- TMP
+    AND inc.PDV_KEY = 638
 GROUP BY
     inc.PDV_COD,
     cco.CCO_COD,
