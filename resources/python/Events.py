@@ -15,14 +15,20 @@ def Invia(DataInizioSTR, DataFineSTR, Checked):
 
         queryResults = Utils.execQuery(Checked, DBconnection, [DataInizioSTR, DataFineSTR])
 
+        PDV_List = ""
+        with open("PDV_presenze.txt", "r") as f:
+            PDV_List = f.read().split(" ")
+
+        print(PDV_List)
+
         for cod_result in queryResults:
+            
+            index = next((i for i, d in enumerate(cod_result) if str(d[1]) in PDV_List), None)
 
-            print(cod_result[0][1])
-
-            Json = Utils.toJSON(cod_result, data_inizio, data_fine)
-
-            #APIcalls.sendData(Json)
-
+            if index is not None:
+                Json = Utils.toJSON(cod_result, data_inizio, data_fine)
+                
+                #APIcalls.sendData(Json)
 
         return True
     else:
