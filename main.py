@@ -23,7 +23,7 @@ app.iconbitmap("resources/assets/Gabrielli.ico")
 
 
 img = Image.open("resources/assets/Gabrielli.png")
-img = img.resize((300, 150))
+img = img.resize((271, 153))
 img = ImageTk.PhotoImage(img)
 panel = tk.Label(app, image = img)
 panel.pack()
