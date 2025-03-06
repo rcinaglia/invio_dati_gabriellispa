@@ -8,8 +8,8 @@ import os
 import resources.python.Events as E
 
 #-----Variables-------
-windowSizeX = 800
-windowSizeY = 400
+windowSizeX = 400
+windowSizeY = 500
 appName = "Invio dati"
 
 
@@ -57,7 +57,7 @@ def aggiungiPDV():
                     f.write(Testo + " ")
 
 
-        Flag = tb.Label(Frame2, text="ciao")
+        Flag = tb.Label(tab2, text="ciao")
         Flag.config(text="List updated")
         Flag.pack(pady=10)
         app.after(1000, Flag.destroy)
@@ -80,64 +80,69 @@ app.title(appName)
 app.iconbitmap("resources/assets/Gabrielli.ico")
 
 
+Notebook = tb.Notebook(app, bootstyle = "superhero")
+
+tab1 = tb.Frame(Notebook)
+tab2 = tb.Frame(Notebook)
+tab3 = tb.Frame(Notebook)
+
+Notebook.add(tab1, text="bella")
+Notebook.pack(pady=50, padx=30)
 
 PrincipalFrame = tb.Frame(app)
 
-MainFrame = tb.Frame(PrincipalFrame)
 
 
-Frame = tb.LabelFrame(MainFrame, text="Invio Dati")
 
 img = Image.open("resources/assets/Gabrielli.png")
 img = img.resize((300, 150))
 img = ImageTk.PhotoImage(img)
-panel = tk.Label(Frame, image = img)
+panel = tk.Label(tab1, image = img)
 panel.grid(columnspan=2)
 
 
-Frame.rowconfigure(2, minsize=45)
+tab1.rowconfigure(2, minsize=45)
 
-Testo = tb.Label(Frame, text="Giorno")
+Testo = tb.Label(tab1, text="Giorno")
 Testo.grid(column=0, row=1, padx=(0, 10))
 
-dataInizio = tb.DateEntry(Frame, bootstyle="primary")
+dataInizio = tb.DateEntry(tab1, bootstyle="primary")
 dataInizio.grid(column=1, row=1, pady=5)
 dataInizio.button.place(y = -0.5, x = 105)
 
 
 State = tk.IntVar()
-enableDataFine = tb.Checkbutton(Frame, text='Data di fine', style='Roundtoggle.Toolbutton',  variable = State,  command= Checked)
+enableDataFine = tb.Checkbutton(tab1, text='Data di fine', style='Roundtoggle.Toolbutton',  variable = State,  command= Checked)
 enableDataFine.grid(column=0, row=2, pady=5, padx=(0, 10))
 
 
 dataVar = tk.StringVar()
-dataFine = tb.DateEntry(Frame, bootstyle="primary")
+dataFine = tb.DateEntry(tab1, bootstyle="primary")
 dataFine.button.place(y = -0.5, x = 105)
 dataFine.grid(column=1, row=2)
 dataFine.grid_remove()
 
 
-Button = tb.Button(Frame, text="Invia dati", bootstyle="primary", command= invio, width=20)
+Button = tb.Button(tab1, text="Invia dati", bootstyle="primary", command= invio, width=20)
 Button.grid(columnspan=2, pady=(10, 0), row=3)
 
-Frame.rowconfigure(4, minsize=25)
+tab1.rowconfigure(4, minsize=25)
 
-progressBar = tb.Progressbar(Frame, orient="horizontal", value=0)
+progressBar = tb.Progressbar(tab1, orient="horizontal", value=0)
 
-Frame.grid(column=0, row=0)
-
-
-
-Frame2 = tb.LabelFrame(MainFrame, text="Inserimento PDV", width=400)
+tab1.grid(column=0, row=0)
 
 
-TestoPDV = tb.Label(Frame2, text="Inserire PDV")
+
+
+
+TestoPDV = tb.Label(tab2, text="Inserire PDV")
 TestoPDV.pack(pady=20)
 
-PDV_Text = tb.Text(Frame2, height=5, width=30)
+PDV_Text = tb.Text(tab2, height=5, width=30)
 PDV_Text.pack()
 
-AddPDV = tb.Button(Frame2, text="Aggiungi PDV", bootstyle="secondary", command= aggiungiPDV, width=20)
+AddPDV = tb.Button(tab2, text="Aggiungi PDV", bootstyle="secondary", command= aggiungiPDV, width=20)
 AddPDV.pack(pady=(25 , 20), padx=50)
 
 
@@ -145,21 +150,20 @@ AddPDV.pack(pady=(25 , 20), padx=50)
 
 
 
-Frame2.grid(column=2, row=0, padx=(15, 0))
-
-MainFrame.pack()
+tab2.grid(column=2, row=0, padx=(15, 0))
 
 
 
 
-SecondaryFrame = tb.LabelFrame(PrincipalFrame, text="Info")
+
+OpenLogs = tb.Button(tab3, text="Open logs", bootstyle="secondary", command= openLogs, width=10)
+OpenLogs.grid(row=0, column=0, pady=10)
 
 
-OpenLogs = tb.Button(SecondaryFrame, text="Open logs", bootstyle="secondary", command= openLogs, width=10)
-OpenLogs.grid(row=0, column=0, pady=10, padx=300)
 
-SecondaryFrame.pack()
+Notebook.add(tab1, text="Invio")
+Notebook.add(tab2, text="Aggiungi PDV")
+Notebook.add(tab3, text="Info")
 
-PrincipalFrame.pack(pady=10)
 
 app.mainloop()
