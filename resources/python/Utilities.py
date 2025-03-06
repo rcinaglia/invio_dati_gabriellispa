@@ -43,7 +43,7 @@ def execQuery(nQuery, DBconnection, date):
 
     cursor = DBconnection.cursor()
 
-    if nQuery == 0:
+    if nQuery == 1:
         cursor.execute(Utils.getQuery(nQuery), DataIniziale = date[0], DataFinale = date[1]) 
     else:
         cursor.execute(Utils.getQuery(nQuery), DataSingola = date[0]) 
@@ -67,25 +67,28 @@ def toJSON(results):
 
     for row in results:
 
-        day = row[0].split(" ")[0]
+        day = row[0]
         expenseCenter = str(row[1]) + "-" + str(row[3])
         tickets = 0
         sales = row[4]
 
         Steps = [{"start": start, "end": end, "sales": sales, "tickets": tickets}]
 
+
         index = next((i for i, d in enumerate(days) if d["day"] == day), None)
 
+        ExpenseCenter = {"expenseCenter": expenseCenter ,"steps": Steps}
+
         if index is not None:
-            ExpenseCenter = {"expenseCenter": expenseCenter ,"steps": Steps}
             days[index]["expenseCenters"].append(ExpenseCenter)
         else:
-            ExpenseCenter = {"expenseCenter": expenseCenter ,"steps": Steps}
             days.append({"day": day, "expenseCenters" : [ExpenseCenter]})
 
 
 
     Final = {"days" : days, "start":start, "end":end}
+
+    print(len(days))
 
     return json.dumps(Final)
 

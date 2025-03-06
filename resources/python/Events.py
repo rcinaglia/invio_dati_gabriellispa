@@ -6,9 +6,12 @@ import datetime
 
 def Invia(DataInizio, DataFine, Checked):
 
-    dataOggi = datetime.datetime.today().strftime('%d/%m/%Y')
+    data_inizio = datetime.datetime.strptime(DataInizio, '%d/%m/%Y')
+    data_fine = datetime.datetime.strptime(DataFine, '%d/%m/%Y')
+    data_oggi = datetime.datetime.today()
+    
 
-    if (DataInizio <= dataOggi and Checked == 0) or  (Checked == 1 and (DataInizio < DataFine and DataFine <= dataOggi and DataFine != DataInizio)):
+    if (data_inizio <= data_oggi and Checked == 0) or (Checked == 1 and (data_inizio < data_fine and data_fine < data_oggi)):
         DBconnection = Utils.DBconnection() 
         queryResults = Utils.execQuery(Checked, DBconnection, [DataInizio, DataFine])
         Json = Utils.toJSON(queryResults)
