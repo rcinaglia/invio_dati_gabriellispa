@@ -8,12 +8,11 @@ import resources.python.Events as E
 #-----Variables-------
 windowSizeX = 400
 windowSizeY = 500
-appName = "ciao"
+appName = "Invio dati"
 
 
 
 #-------GUI---------
-
 
 app = tb.Window(themename ="darkly")
 

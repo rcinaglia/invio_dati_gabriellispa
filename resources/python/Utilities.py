@@ -2,10 +2,11 @@ import os
 from dotenv import load_dotenv
 import oracledb
 import json
+import datetime
 import resources.python.Utilities as Utils
 
 
-def getQuery(query, fileName = "queris.sql"):
+def getQuery(query, fileName = "resources/sql/queries.sql"):
     with open(fileName, "r") as file:
         queriesString = file.read()
 
@@ -43,12 +44,29 @@ def execQuery(nQuery, DBconnection, date):
 
     cursor = DBconnection.cursor()
 
-    if nQuery == 1:
-        cursor.execute(Utils.getQuery(nQuery), DataIniziale = date[0], DataFinale = date[1]) 
-    else:
-        cursor.execute(Utils.getQuery(nQuery), DataSingola = date[0]) 
+    results = []
 
-    results = cursor.fetchall()
+
+    if nQuery == 1:
+        cursor.execute(Utils.getQuery(nQuery + 2), DataIniziale = date[0], DataFinale = date[1]) 
+        pdv_cods = cursor.fetchall()
+
+        for pdv_cod in pdv_cods:
+            cursor.execute(Utils.getQuery(nQuery), DataIniziale = date[0], DataFinale = date[1], PDV = pdv_cod[0])
+            cod_results = cursor.fetchall()
+
+            results.append(cod_results)
+
+    else:
+        cursor.execute(Utils.getQuery(nQuery + 2), DataSingola = date[0]) 
+        pdv_cods = cursor.fetchall()
+
+        for pdv_cod in pdv_cods:
+            cursor.execute(Utils.getQuery(nQuery), DataSingola = date[0], PDV = pdv_cod[0])
+            cod_results = cursor.fetchall()
+
+            results.append(cod_results)
+
 
     cursor.close()
     DBconnection.close()
@@ -57,7 +75,7 @@ def execQuery(nQuery, DBconnection, date):
 
 
 
-def toJSON(results):
+def toJSON(results, data_inizio, data_fine):
     
     start = 540 
     end = 555
@@ -65,9 +83,22 @@ def toJSON(results):
     ExpenseCenter = []
     days = []
 
+    dataMin = data_fine
+    dataMax = data_inizio
+
+
+
     for row in results:
 
         day = row[0]
+
+        data_curr = datetime.datetime.strptime(day, '%d-%m-%Y')
+
+        if data_curr < dataMin:
+            dataMin = data_curr
+        if data_curr > dataMax:
+            dataMax = data_curr
+
         expenseCenter = str(row[1]) + "-" + str(row[3])
         tickets = 0
         sales = row[4]
@@ -84,11 +115,12 @@ def toJSON(results):
         else:
             days.append({"day": day, "expenseCenters" : [ExpenseCenter]})
 
+    
+    dataMin = datetime.datetime.strftime(dataMin, '%d-%m-%Y')
+    dataMax = datetime.datetime.strftime(dataMax, '%d-%m-%Y')
 
+    Final = {"days" : days, "start":dataMin, "end":dataMax}
 
-    Final = {"days" : days, "start":start, "end":end}
-
-    print(len(days))
 
     return json.dumps(Final)
 
