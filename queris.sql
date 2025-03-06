@@ -32,7 +32,7 @@ LEFT JOIN (
 WHERE
     inc.INC_DATA = TO_TIMESTAMP(:DataSingola, 'DD-MM-YYYY') 
     AND cco.CCO_COD IS NOT NULL 
-    AND inc.PDV_COD = :PDV
+    AND inc.PDV_COD = CAST(:PDV AS INT)
 GROUP BY
     inc.PDV_COD,
     cco.CCO_COD,
@@ -74,7 +74,7 @@ WHERE
     inc.INC_DATA >= TO_TIMESTAMP(:DataIniziale, 'DD-MM-YYYY') 
     AND inc.INC_DATA < TO_TIMESTAMP(:DataFinale, 'DD-MM-YYYY')
     AND cco.CCO_COD IS NOT NULL
-    AND inc.PDV_COD = :PDV
+    AND inc.PDV_COD = CAST(:PDV AS INT)
 GROUP BY
     inc.PDV_COD,
     cco.CCO_COD,
