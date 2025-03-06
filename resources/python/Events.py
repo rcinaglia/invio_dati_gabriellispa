@@ -21,8 +21,7 @@ def Invia(DataInizioSTR, DataFineSTR, Checked):
 
             Json = Utils.toJSON(cod_result, data_inizio, data_fine)
 
-            with open("resources/JSONs/" + str(cod_result[0][1]) + ".json", "w") as file :
-                file.write(Json)
+            #APIcalls.sendData(Json)
 
 
         return True
