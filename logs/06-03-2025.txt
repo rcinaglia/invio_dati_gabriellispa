@@ -1,0 +1,2 @@
+>> Errore durante l'inserimento 
+** Non è stato possibile effettuare la chiamata all'API **

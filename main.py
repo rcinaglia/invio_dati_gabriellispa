@@ -3,13 +3,14 @@ import ttkbootstrap as tb
 from PIL import Image, ImageTk
 from ttkbootstrap.dialogs import Messagebox
 import re
+import os
 
 
 import resources.python.Events as E
 
 #-----Variables-------
 windowSizeX = 600
-windowSizeY = 300
+windowSizeY = 400
 appName = "Invio dati"
 
 
@@ -25,9 +26,11 @@ def Checked():
         dataFine.grid_remove()
 
 
-def invio():
-    if not E.Invia(dataInizio.entry.get(), dataFine.entry.get(), State.get()):
+def invio():    
+    if not E.Invia(dataInizio.entry.get(), dataFine.entry.get(), State.get(), progressBar):
         Messagebox.show_error(message="Inserire una data valida", title="Errore")
+
+    
 
 
 def aggiungiPDV():
@@ -61,7 +64,8 @@ def aggiungiPDV():
 
     
 
-
+def openLogs():
+    os.startfile("logs")
 
 
 
@@ -74,9 +78,9 @@ app.iconbitmap("resources/assets/Gabrielli.ico")
 
 
 
+PrincipalFrame = tb.Frame(app)
 
-
-MainFrame = tb.Frame(app)
+MainFrame = tb.Frame(PrincipalFrame)
 
 
 Frame = tb.Frame(MainFrame)
@@ -109,12 +113,15 @@ dataFine.button.place(y = -0.5, x = 105)
 dataFine.grid(column=1, row=2)
 dataFine.grid_remove()
 
-Frame.grid(column=0, row=0)
-
 
 Button = tb.Button(Frame, text="Invia dati", bootstyle="primary", command= invio, width=20)
-Button.grid(columnspan=2, pady=(10, 0))
+Button.grid(columnspan=2, pady=(10, 0), row=3)
 
+Frame.rowconfigure(4, minsize=25)
+
+progressBar = tb.Progressbar(Frame, orient="horizontal", value=0)
+
+Frame.grid(column=0, row=0)
 
 
 
@@ -147,5 +154,20 @@ AddPDV.pack(pady=(25 ,0))
 Frame2.grid(column=2, row=0, padx=(15, 0))
 
 MainFrame.pack()
+
+
+Separator2 = tb.Separator(PrincipalFrame, orient="horizontal")
+Separator2.pack(fill="x", pady=(5, 10))
+
+
+SecondaryFrame = tb.Frame(PrincipalFrame)
+
+
+OpenLogs = tb.Button(SecondaryFrame, text="Open logs", bootstyle="secondary", command= openLogs, width=10)
+OpenLogs.grid(row=0, column=0, pady=10)
+
+SecondaryFrame.pack()
+
+PrincipalFrame.pack()
 
 app.mainloop()
