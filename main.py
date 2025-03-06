@@ -39,7 +39,7 @@ def aggiungiPDV():
         delimiter = " "
         TestoList = delimiter.join( re.split('; |,|\n|-| |/|"', TextContent)).split(" ")
 
-        print(TestoList)
+        TestoList = list(set(TestoList))
 
         PDV_List = ""
         with open("PDV_presenze.txt", "r") as f:
