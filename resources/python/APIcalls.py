@@ -1,8 +1,11 @@
 import requests
 import os
 from dotenv import load_dotenv
+import datetime
 
 def sendData(json_data):
+    filename = datetime.datetime.now().strftime()
+    path = "logs/" + str(filename, '%d-%m-%Y') + ".txt"
     API_KEY = os.getenv('TOKEN')
     try:
         url = "https://magazzinigabrielli.staffroster.com//wsrest/v1/sales?type=1"
@@ -17,10 +20,12 @@ def sendData(json_data):
             print(">> Dati inseriti correttamente")
             print("RSC:", response.status_code)
         else:
-            print(">> Errore durante l'inserimento")
-            print("RSC:", response.status_code)
-            print("Message: ", response.json()['message'])
+            with open(path, "a") as errorLog: 
+                errorLog.write(">> Errore durante l'inserimento")
+                errorLog.write("RSC:", response.status_code)
+                errorLog.write("Message: ", response.json()['message'])
     except:
-        print("** Non è stato possibile effettuare la chiamata allì'API **")
+        with open(path, "a") as errorLog: 
+            errorLog.write("** Non è stato possibile effettuare la chiamata all'API **")
 
 
