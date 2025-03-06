@@ -112,12 +112,8 @@ dataFine.grid_remove()
 Frame.grid(column=0, row=0)
 
 
-Button = tb.Button(Frame, text="Invia dati", bootstyle="primary-outline", command= invio, width=20)
+Button = tb.Button(Frame, text="Invia dati", bootstyle="primary", command= invio, width=20)
 Button.grid(columnspan=2, pady=(10, 0))
-
-
-
-
 
 
 
@@ -131,21 +127,16 @@ Frame3.grid(column=1, row=0, padx=20)
 
 
 
-
-
-
-
-
 Frame2 = tb.Frame(MainFrame)
 
 
-Testo = tb.Label(Frame2, text="Inserire PDV")
-Testo.pack(pady=10)
+TestoPDV = tb.Label(Frame2, text="Inserire PDV")
+TestoPDV.pack(pady=10)
 
 PDV_Text = tb.Text(Frame2, height=5, width=30)
 PDV_Text.pack()
 
-AddPDV = tb.Button(Frame2, text="Aggiungi PDV", bootstyle="primary-outline", command= aggiungiPDV, width=20)
+AddPDV = tb.Button(Frame2, text="Aggiungi PDV", bootstyle="secondary", command= aggiungiPDV, width=20)
 AddPDV.pack(pady=(25 ,0))
 
 

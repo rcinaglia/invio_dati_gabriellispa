@@ -1,1 +1,88 @@
-{"days": [{"day": "03-03-2025", "expenseCenters": [{"expenseCenter": "525-20800", "steps": [{"start": 540, "end": 555, "sales": 3918.28, "tickets": 0}]}, {"expenseCenter": "525-20400", "steps": [{"start": 540, "end": 555, "sales": 4250.09, "tickets": 0}]}, {"expenseCenter": "525-20200", "steps": [{"start": 540, "end": 555, "sales": 6726.96, "tickets": 0}]}, {"expenseCenter": "525-20300", "steps": [{"start": 540, "end": 555, "sales": 6155.42, "tickets": 0}]}, {"expenseCenter": "525-20350", "steps": [{"start": 540, "end": 555, "sales": 1980.67, "tickets": 0}]}, {"expenseCenter": "525-20250", "steps": [{"start": 540, "end": 555, "sales": 6291.8, "tickets": 0}]}, {"expenseCenter": "525-21050", "steps": [{"start": 540, "end": 555, "sales": 13395.05, "tickets": 0}]}]}], "start": "03-03-2025", "end": "03-03-2025"}
+{
+    "days": [
+        {
+            "day": "02-03-2025",
+            "expenseCenters": [
+                {
+                    "expenseCenter": "525-20250",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 3729.47,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "525-20800",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 2226.52,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "525-20300",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 4323.68,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "525-20400",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 2718.55,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "525-20200",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 4786.3,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "525-20350",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 509.13,
+                            "tickets": 0
+                        }
+                    ]
+                },
+                {
+                    "expenseCenter": "525-21050",
+                    "steps": [
+                        {
+                            "start": 540,
+                            "end": 555,
+                            "sales": 10496.11,
+                            "tickets": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "start": "02-03-2025",
+    "end": "02-03-2025"
+}
