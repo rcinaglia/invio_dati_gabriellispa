@@ -1,6 +1,7 @@
 import resources.python.Utilities as Utils
 import resources.python.APIcalls as APIcalls
 import datetime
+from ttkbootstrap.dialogs import Messagebox
 
 def Invia(DataInizioSTR, DataFineSTR, Checked, progressBar):
 
@@ -24,20 +25,21 @@ def Invia(DataInizioSTR, DataFineSTR, Checked, progressBar):
 
         progressBar.grid(columnspan=2, pady=(10, 0), row=4)
 
-        for cod_result in queryResults:
-
-            index = next((i for i, d in enumerate(cod_result) if str(d[1]) in PDV_List), None)
-
-            if index is not None:
-                Json = Utils.toJSON(cod_result, data_inizio, data_fine)
-                if APIcalls.sendData(Json):
-                    progressBar.config(value = Amount / 100 * counter)
-                else:
-                    print("erorre nella chiamata dell'API")
-                    progressBar.grid_remove()
-                    break
-                    
-            counter += 1
+        if PDV_List == []:
+                Messagebox.show_warning(title="PDV LIST VUOTA", message="Lista punti vendita vuota. Aggiungerne di nuovi")
+                progressBar.grid_remove()
+        else:
+            for cod_result in queryResults:
+            
+                index = next((i for i, d in enumerate(cod_result) if str(d[1]) in PDV_List), None)
+    
+                if index is not None:
+                    Json = Utils.toJSON(cod_result, data_inizio, data_fine)
+                    if APIcalls.sendData(Json):
+                        progressBar.config(value = Amount / 100 * counter)
+            
+                        
+                counter += 1
 
         progressBar.grid_remove()
 

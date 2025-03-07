@@ -31,7 +31,7 @@ def invio():
     if not E.Invia(dataInizio.entry.get(), dataFine.entry.get(), State.get(), progressBar):
         Messagebox.show_error(message="Inserire una data valida", title="Errore")
     else:
-        Button.config(default="normal", bootstyle="primary")
+       Button.config(default="normal", bootstyle="primary")
 
     
 
