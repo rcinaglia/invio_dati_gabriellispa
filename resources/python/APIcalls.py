@@ -1,7 +1,7 @@
 import requests
 import os
-from dotenv import load_dotenv
 import datetime
+from ttkbootstrap.dialogs import Messagebox
 
 def sendData(json_data):
     filename = datetime.datetime.now().strftime('%d-%m-%Y')
@@ -20,12 +20,14 @@ def sendData(json_data):
             print("RSC:", response.status_code)
             return True
         else:
+            Messagebox.show_error(title="ERRORE INSERIMENTO DATI", message=f"API RESPONSE CODE: {response.status_code}\nMESSAGE: {response.json()['message']}")
             with open(path, "a") as errorLog: 
                 errorLog.write(">> Errore durante l'inserimento \n")
                 errorLog.write("RSC:", response.status_code, "\n")
                 errorLog.write("Message: ", response.json()['message'], "\n")
                 return False
     except:
+        Messagebox.show_error(title="ERRORE API", message="Non è stato possibile effettuare la chiamata all'API")
         with open(path, "a") as errorLog: 
             errorLog.write("** Non è stato possibile effettuare la chiamata all'API **")
         return False
