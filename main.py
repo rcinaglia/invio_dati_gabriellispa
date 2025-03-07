@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 from ttkbootstrap.dialogs import Messagebox
 import re
 import os
+import time
 
 import resources.python.Events as E
 
@@ -28,10 +29,17 @@ def Checked():
 def invio():    
     Button.config(default="disabled", bootstyle="secondary")
 
-    if not E.Invia(dataInizio.entry.get(), dataFine.entry.get(), State.get(), progressBar):
-        Messagebox.show_error(message="Inserire una data valida", title="Errore")
+    if not E.Invia(dataInizio.entry.get(), dataFine.entry.get(), State.get(), APIprogress):
+        Messagebox.show_error(message="Errore ", title="Errore")
     else:
-       Button.config(default="normal", bootstyle="primary")
+        APIprogress.config(text= "Completato")  
+        APIprogress.update()
+
+        Button.config(default="normal", bootstyle="primary")
+    
+    time.sleep(1)
+    APIprogress.grid_forget()
+
 
     
 
@@ -133,8 +141,7 @@ Button.grid(columnspan=2, pady=(10, 0), padx=100, row=3)
 
 tab1.rowconfigure(4, minsize=25)
 
-progressBar = tb.Progressbar(tab1, orient="horizontal", value=0)
-
+APIprogress = tb.Label(tab1)
 
 
 

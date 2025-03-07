@@ -24,8 +24,8 @@ def sendData(json_data):
             with open(path, "a") as errorLog: 
                 errorLog.write(str(datetime.datetime.now()) + "\n")
                 errorLog.write(">> Errore durante l'inserimento \n")
-                errorLog.write("RSC: " + response.status_code + "\n")
-                errorLog.write("Message: " + response.json()['message'] + "\n")
+                errorLog.write("RSC: " + str(response.status_code) + "\n")
+                errorLog.write("Message: " + str(response.json()['message']) + "\n")
                 return False
     except:
         with open(path, "a") as errorLog: 
