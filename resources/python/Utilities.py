@@ -4,7 +4,7 @@ import oracledb
 import json
 import datetime
 import resources.python.Utilities as Utils
-
+from ttkbootstrap.dialogs import Messagebox
 
 def getQuery(query, fileName = "resources/sql/queries.sql"):
     with open(fileName, "r") as file:
@@ -36,7 +36,7 @@ def DBconnection():
         return connection
     
     except:
-        print("errore di connession al db")
+        Messagebox.show_error(title="ERRORE CONNESIONE AL DATABASE", message="Errore durante la connessione al database.\nControllare le credenziali in Pass.ENV e riprovare.")
         return 0
 
 
