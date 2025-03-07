@@ -5,6 +5,9 @@ from ttkbootstrap.dialogs import Messagebox
 
 def Invia(DataInizioSTR, DataFineSTR, Checked, progressBar):
 
+    filename = datetime.datetime.now().strftime('%d-%m-%Y')
+    path = "logs/" + str(filename) + ".txt"
+
     data_inizio = datetime.datetime.strptime(DataInizioSTR, '%d/%m/%Y')
     data_fine = datetime.datetime.strptime(DataFineSTR, '%d/%m/%Y')
     data_oggi = datetime.datetime.today()
@@ -26,6 +29,9 @@ def Invia(DataInizioSTR, DataFineSTR, Checked, progressBar):
         progressBar.grid(columnspan=2, pady=(10, 0), row=4)
 
         if PDV_List == []:
+                with open(path, "a") as errorLog:
+                    errorLog.write(str(datetime.datetime.now()) + "\n")
+                    errorLog.write(">> PDV LIST VUOTA \n")
                 Messagebox.show_warning(title="PDV LIST VUOTA", message="Lista punti vendita vuota. Aggiungerne di nuovi")
                 progressBar.grid_remove()
         else:

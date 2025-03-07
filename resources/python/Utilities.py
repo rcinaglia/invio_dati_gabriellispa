@@ -16,6 +16,9 @@ def getQuery(query, fileName = "resources/sql/queries.sql"):
 
 def DBconnection():
 
+    filename = datetime.datetime.now().strftime('%d-%m-%Y')
+    path = "logs/" + str(filename) + ".txt"
+
     try:
         load_dotenv("Pass.ENV")
 
@@ -35,7 +38,11 @@ def DBconnection():
 
         return connection
     
-    except:
+    except oracledb.DatabaseError as e:
+        with open(path, "a") as errorLog:
+            
+            errorLog.write(str(datetime.datetime.now()) + "\n")
+            errorLog.write(">> ERRORE CONNESIONE AL DATABASE: " +  e + "\n")
         Messagebox.show_error(title="ERRORE CONNESIONE AL DATABASE", message="Errore durante la connessione al database.\nControllare le credenziali in Pass.ENV e riprovare.")
         return 0
 

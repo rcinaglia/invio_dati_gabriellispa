@@ -22,14 +22,15 @@ def sendData(json_data):
         else:
             Messagebox.show_error(title="ERRORE INSERIMENTO DATI", message=f"API RESPONSE CODE: {response.status_code}\nMESSAGE: {response.json()['message']}")
             with open(path, "a") as errorLog: 
+                errorLog.write(str(datetime.datetime.now()) + "\n")
                 errorLog.write(">> Errore durante l'inserimento \n")
-                errorLog.write("RSC:", response.status_code, "\n")
-                errorLog.write("Message: ", response.json()['message'], "\n")
+                errorLog.write("RSC: " + response.status_code + "\n")
+                errorLog.write("Message: " + response.json()['message'] + "\n")
                 return False
     except:
-        Messagebox.show_error(title="ERRORE API", message="Non è stato possibile effettuare la chiamata all'API")
         with open(path, "a") as errorLog: 
-            errorLog.write("** Non è stato possibile effettuare la chiamata all'API **")
+            errorLog.write(str(datetime.datetime.now()) + "\n")
+            errorLog.write("** Non è stato possibile effettuare la chiamata all'API ** \n")
         return False
 
 
