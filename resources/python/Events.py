@@ -34,12 +34,12 @@ def Invia(DataInizioSTR, DataFineSTR, Checked, progressBar):
                     progressBar.config(value = Amount / 100 * counter)
                 else:
                     print("erorre nella chiamata dell'API")
-                    #progressBar.grid_remove()
+                    progressBar.grid_remove()
                     break
                     
             counter += 1
 
-        #progressBar.grid_remove()
+        progressBar.grid_remove()
 
         return True
     else:
